@@ -1,0 +1,8 @@
+use schoolDB
+
+db.students.insertMany([
+    {Student_id:"S001", name:"Joy", age:"20"}
+    {Student_id:"S002", name:"Reuben", age:"22"}
+    {Student_id:"S003", name:"Alex", age:"18"}
+    {Student_id:"S004", name:"Morine", age:"19"}
+])
