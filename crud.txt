@@ -1,8 +1,57 @@
 use schoolDB
 
+//Hands-on one
 db.students.insertMany([
-    {Student_id:"S001", name:"Joy", age:"20"}
-    {Student_id:"S002", name:"Reuben", age:"22"}
-    {Student_id:"S003", name:"Alex", age:"18"}
-    {Student_id:"S004", name:"Morine", age:"19"}
+    {Student_id:"S001", name:"Joy", age:20, track:"MERN"},
+    {Student_id:"S002", name:"Reuben", age:22,track:"Python"},
+    {Student_id:"S003", name:"Alex", age:18, track:"AI"},
+    {Student_id:"S004", name:"Morine", age:19, track:"Mobile"},
+])
+
+//Hands-on two
+//Enhance students with embedded contacts
+
+db.students.updateMany({},{
+    $set: {
+        contact:{email: "user@example.com", phone:"0736527382"},
+        emergency:{name: "Parent", relation: "Mother", phone: "07483934732"},
+    }
+})
+
+
+//Hands-on THree: courses and mentors with referencing
+
+db.mentors.insertMany([
+    {mentor_id:"M001", name:"Mike", speciality:"Mobile developer"},
+    {mentor_id:"M002", name:"Willis", speciality:"Network developer"},
+    {mentor_id:"M003", name:"Monic", speciality:"Software engineering"},
+])
+
+
+db.courses.insertMany([
+    {course_id:"C101", title:"Programming", duration_weeks:8, mentor_id:"M001"},
+    {course_id:"C102", title:"Math", duration_weeks:16, mentor_id:"M002"},
+    {course_id:"C103", title:"Poetry", duration_weeks:4, mentor_id:"M003"},
+   
+])
+
+//Hands-on Four : Connect everything together with enrollments (Analytics)
+
+db.enrollments.insertMany([
+     {Student_id:"S001",course_id:"C101" ,status:"in-progress", score:88},
+    {Student_id:"S002", course_id:"C102",status:"completed", score:92},
+    {Student_id:"S003", course_id:"C101",status:"in-progress", score:78},
+    {Student_id:"S004", course_id:"C103",status:"completed", score:85},
+])
+
+//Agregation: Students per course
+
+db.enrollments.aggregate([
+    { $group:{_id: "$course_id", total_students:{$sum:1}}}
+])
+
+//Agregation: Average score per course
+
+db.enrollments.aggregate([
+    
 ])
