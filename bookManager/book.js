@@ -31,7 +31,7 @@ async function deleteBook(id){
     const result=await books.deleteOne(
         { _id: new ObjectId(id)},
     )
-    console.log(`Deleted: ${result.deletCount}`);
+    console.log(`Deleted: ${result.deletedCount}`);
 }
 
 module.exports={addBook, listBooks, updateBooks, deleteBook}
